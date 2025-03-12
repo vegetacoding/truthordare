@@ -243,11 +243,72 @@
           margin-bottom: 5px;
         }
       }
+
+      .logo {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0px;
+      }
+
+      .game-logo {
+        width: 100px;
+        height: 100px;
+        filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+        transition: transform 0.3s ease;
+      }
+
+      .game-logo:hover {
+        transform: scale(1.1) rotate(5deg);
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Thật hay Thách</h1>
+      <div>
+        <div class="logo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            class="game-logo"
+          >
+            <defs>
+              <linearGradient
+                id="logoGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop
+                  offset="0%"
+                  style="stop-color: var(--primary-color); stop-opacity: 1"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: var(--secondary-color); stop-opacity: 1"
+                />
+              </linearGradient>
+            </defs>
+            <path
+              d="M50 10 L75 40 Q85 50, 75 60 L50 90 L25 60 Q15 50, 25 40 Z"
+              fill="url(#logoGradient)"
+              stroke="white"
+              stroke-width="3"
+            />
+            <text
+              x="50"
+              y="55"
+              text-anchor="middle"
+              font-size="20"
+              font-weight="bold"
+              fill="white"
+            >
+              T/D
+            </text>
+          </svg>
+        </div>
+        <h1>Thật hay Thách</h1>
+      </div>
 
       <div class="mode-selection">
         <button class="mode-btn" data-mode="friends" onclick="selectMode(this)">
@@ -451,7 +512,7 @@
         validatePlayerCount();
       }
 
-      form.addEventListener("submit", function (event) {
+      playerSetupForm.addEventListener("submit", function (event) {
         const inputs = document.querySelectorAll('input[name="players[]"]');
         const playerNames = Array.from(inputs).map((input) =>
           input.value.trim()
