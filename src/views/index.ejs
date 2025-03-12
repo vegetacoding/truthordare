@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thật hay Thách</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-dark-purple: #1a0b2e;
+        --bg-gradient-start: #6a11cb;
+        --bg-gradient-end: #2575fc;
+        --text-white: #ffffff;
+        --text-light: #e0e0e0;
+        --accent-purple: #6a11cb;
+        --accent-blue: #2575fc;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, var(--bg-dark-purple), #2a0d4f);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--text-white);
+        overflow: hidden;
+        perspective: 1000px;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 40px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        transform: rotateX(10deg) scale(0.9);
+        opacity: 0;
+        animation: fadeInSlide 0.8s forwards;
+      }
+
+      @keyframes fadeInSlide {
+        to {
+          transform: rotateX(0) scale(1);
+          opacity: 1;
+        }
+      }
+
+      .mode-selection {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 30px;
+        overflow-x: auto;
+        padding: 5px;
+      }
+
+      .mode-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-light);
+        border: 1px solid transparent;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .mode-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .mode-btn.selected {
+        background: var(--text-white);
+        color: var(--bg-dark-purple);
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+      }
+
+      .mode-btn span {
+        font-size: 1.2em;
+        margin-right: 5px;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        background: linear-gradient(to right, #fff, #e0e0e0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -1px;
+      }
+
+      .game-question {
+        text-align: center;
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+        line-height: 1.4;
+        color: var(--text-white);
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .truth-dare-btns {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .truth-dare-btns button {
+        padding: 15px 40px;
+        border: none;
+        border-radius: 30px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .truth-btn {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        box-shadow: 0 10px 20px rgba(106, 17, 203, 0.3);
+      }
+
+      .dare-btn {
+        background: linear-gradient(135deg, #ff6b6b, #ff9a9a);
+        color: white;
+        box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+      }
+
+      .truth-btn:hover,
+      .dare-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .app-download {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 30px;
+        padding: 10px 20px;
+        backdrop-filter: blur(10px);
+      }
+
+      .app-download img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        border-radius: 10px;
+      }
+
+      .app-download-btn {
+        background: #2196f3;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 15px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          margin: 20px;
+          padding: 30px 15px;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+        .game-question {
+          font-size: 1.5rem;
+        }
+        .truth-dare-btns button {
+          padding: 12px 30px;
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Thật hay Thách</h1>
+
+      <div class="mode-selection">
+        <button class="mode-btn" data-mode="friends">
+          <span>🤝</span> Popular
+        </button>
+        <button class="mode-btn" data-mode="couple">
+          <span>😈</span> Extreme
+        </button>
+        <button class="mode-btn" data-mode="party">
+          <span>❤️</span> For Couples
+        </button>
+        <button class="mode-btn" data-mode="spicy">
+          <span>🌶️</span> Spicy
+        </button>
+      </div>
+
+      <div class="game-question">What celebrity do you have a crush on?</div>
+
+      <div class="truth-dare-btns">
+        <button class="truth-btn">Truth</button>
+        <button class="dare-btn">Dare</button>
+      </div>
+
+      <div class="app-download">
+        <img src="https://via.placeholder.com/40" alt="App Icon" />
+        <div>
+          <strong>Truth or Dare</strong>
+          <br />
+          <button class="app-download-btn">Get the app</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Mode selection logic
+      const modeBtns = document.querySelectorAll(".mode-btn");
+      modeBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          modeBtns.forEach((b) => b.classList.remove("selected"));
+          btn.classList.add("selected");
+        });
+      });
+    </script>
+  </body>
+</html>

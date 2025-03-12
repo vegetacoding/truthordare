@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Truth or Dare - Game</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #6a11cb;
+        --secondary-color: #2575fc;
+        --background-gradient: linear-gradient(
+          135deg,
+          #6a11cb 0%,
+          #2575fc 100%
+        );
+        --card-background: rgba(255, 255, 255, 0.9);
+        --text-color: #333;
+        --accent-color: #ff6b6b;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: var(--background-gradient);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px;
+        overflow: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: rgba(255, 255, 255, 0.05);
+        transform: rotate(-45deg);
+        z-index: -1;
+      }
+
+      .container {
+        background: var(--card-background);
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        padding: 100px;
+        width: 100%;
+        max-width: 500px;
+        transform: rotateX(10deg) scale(0.9);
+        opacity: 0;
+        animation: fadeInSlide 0.8s forwards;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+        position: relative;
+        padding-bottom: 100px; /* Make space for restart button */
+      }
+
+      @keyframes fadeInSlide {
+        to {
+          transform: rotateX(0) scale(1);
+          opacity: 1;
+        }
+      }
+
+      h1 {
+        color: var(--primary-color);
+        margin-bottom: 30px;
+        font-size: 2.5rem;
+        letter-spacing: -1px;
+        background: linear-gradient(
+          to right,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .current-player {
+        color: var(--accent-color);
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+        font-weight: 600;
+      }
+
+      .player-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+
+      .player-tag {
+        background-color: rgba(106, 17, 203, 0.1);
+        color: var(--primary-color);
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+      }
+
+      .player-tag:hover {
+        transform: scale(1.05);
+        background-color: rgba(106, 17, 203, 0.2);
+      }
+
+      .btn-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .truth-btn {
+        background: linear-gradient(to right, #3494e6, #2575fc);
+        color: white;
+      }
+
+      .dare-btn {
+        background: linear-gradient(to right, #ff6b6b, #ff4757);
+        color: white;
+      }
+
+      .restart-btn {
+        background: linear-gradient(to right, #ff6b6b, #ff4757);
+        color: white;
+        margin-left: 10px;
+      }
+
+      .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          margin: 20px;
+          padding: 30px 20px;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+        .current-player {
+          font-size: 1.2rem;
+        }
+        .btn {
+          padding: 12px 25px;
+          font-size: 0.9rem;
+        }
+        .btn-group {
+          flex-direction: column;
+          gap: 15px;
+        }
+      }
+
+      .game-mode {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: rgba(106, 17, 203, 0.1);
+        color: var(--primary-color);
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .restart-section {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+      .btn-restart {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(106, 17, 203, 0.1);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .btn-restart svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--primary-color);
+      }
+      .btn-restart:hover {
+        background-color: rgba(106, 17, 203, 0.2);
+        transform: scale(1.1);
+      }
+      .btn-restart:hover svg {
+        stroke: var(--secondary-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="game-mode"><%= mode %> Chế Độ</div>
+      <h1>Thật hay Thách</h1>
+      <div class="current-player">
+        Người Chơi Hiện Tại: <%= currentPlayer %>
+      </div>
+      <div class="player-list">
+        <% players.forEach(function(player) { %>
+        <div class="player-tag"><%= player %></div>
+        <% }); %>
+      </div>
+      <div class="btn-group">
+        <form action="/generate" method="POST" style="display: inline">
+          <button type="submit" name="type" value="truth" class="btn truth-btn">
+            Thật
+          </button>
+        </form>
+        <form action="/generate" method="POST" style="display: inline">
+          <button type="submit" name="type" value="dare" class="btn dare-btn">
+            Thách
+          </button>
+        </form>
+      </div>
+      <div class="restart-section">
+        <a href="/restart" class="btn-restart" title="Chơi Lại">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
